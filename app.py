@@ -37,16 +37,12 @@ if "joke" in df.columns:
     cur = conn.cursor()
 
     try:
-        # -----------------------------
-        # 5) SET CONTEXT
-        # -----------------------------
+        
         cur.execute(f'USE WAREHOUSE "{WAREHOUSE}"')
         cur.execute(f'USE DATABASE "{DATABASE}"')
         cur.execute(f'USE SCHEMA "{SCHEMA}"')
 
-        # -----------------------------
-        # 6) AUTO CREATE TABLE BASED ON DATAFRAME
-        # -----------------------------
+        
         col_defs = []
         for col, dtype in df.dtypes.items():
             if "int" in str(dtype):
@@ -63,18 +59,13 @@ if "joke" in df.columns:
         '''
         cur.execute(create_table_sql)
 
-        # -----------------------------
-        # 7) UPLOAD DATAFRAME TO SNOWFLAKE
-        # -----------------------------
         success, nchunks, nrows, _ = write_pandas(conn, df, TABLE_NAME1)
 
         print("Upload Success:", success)
         print("Chunks Uploaded:", nchunks)
         print("Rows Inserted:", nrows)
 
-        # -----------------------------
-        # 8) VERIFY DATA
-        # -----------------------------
+        
         cur.execute(f'SELECT COUNT(*) FROM "{TABLE_NAME1}"')
 
     finally:
@@ -90,16 +81,12 @@ else:
     cur = conn.cursor()
 
     try:
-        # -----------------------------
-        # 5) SET CONTEXT
-        # -----------------------------
+        
         cur.execute(f'USE WAREHOUSE "{WAREHOUSE}"')
         cur.execute(f'USE DATABASE "{DATABASE}"')
         cur.execute(f'USE SCHEMA "{SCHEMA}"')
 
-        # -----------------------------
-        # 6) AUTO CREATE TABLE BASED ON DATAFRAME
-        # -----------------------------
+        
         col_defs = []
         for col, dtype in df.dtypes.items():
             if "int" in str(dtype):
@@ -118,18 +105,12 @@ else:
         '''
         cur.execute(create_table_sql)
 
-        # -----------------------------
-        # 7) UPLOAD DATAFRAME TO SNOWFLAKE
-        # -----------------------------
         success, nchunks, nrows, _ = write_pandas(conn, df, TABLE_NAME2)
 
         print("Upload Success:", success)
         print("Chunks Uploaded:", nchunks)
         print("Rows Inserted:", nrows)
 
-        # -----------------------------
-        # 8) VERIFY DATA
-        # -----------------------------
         cur.execute(f'SELECT COUNT(*) FROM "{TABLE_NAME2}"')
 
     finally:
