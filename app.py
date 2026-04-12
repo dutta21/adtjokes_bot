@@ -1,4 +1,7 @@
 import pandas as pd
-import numpy as np
+import requests
 
-print("Hello World")
+url = "https://v2.jokeapi.dev/joke/Dark"
+response = requests.get(url)
+data = response.json()
+print(data)
