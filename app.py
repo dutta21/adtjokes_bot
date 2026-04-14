@@ -5,6 +5,7 @@ from snowflake.connector.pandas_tools import write_pandas
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+import send_msg
 
 url = "https://v2.jokeapi.dev/joke/Dark"
 
@@ -20,7 +21,6 @@ SCHEMA = os.getenv("SCHEMA")
 TABLE_NAME1 = os.getenv("TABLE_NAME1")
 TABLE_NAME2 = os.getenv("TABLE_NAME2")
 
-output_file = "check.xlsx"
 response = requests.get(url)
 data = response.json()
 df = pd.json_normalize(data)
@@ -28,6 +28,9 @@ df["LOAD_TIME"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 df.columns = [col.replace(".", "_") for col in df.columns]
 
 if "joke" in df.columns:
+    x="Joke: "+df['joke']
+    send_msg.main(x)
+
     conn = snowflake.connector.connect(
         user=USER,
         password=PASSWORD,
@@ -61,9 +64,9 @@ if "joke" in df.columns:
 
         success, nchunks, nrows, _ = write_pandas(conn, df, TABLE_NAME1)
 
-        print("Upload Success:", success)
-        print("Chunks Uploaded:", nchunks)
-        print("Rows Inserted:", nrows)
+        # print("Upload Success:", success)
+        # print("Chunks Uploaded:", nchunks)
+        # print("Rows Inserted:", nrows)
 
         
         cur.execute(f'SELECT COUNT(*) FROM "{TABLE_NAME1}"')
@@ -72,6 +75,8 @@ if "joke" in df.columns:
         cur.close()
         conn.close()
 else:
+    x="Joke: \nSetup:"+df['setup']+"\nDelivey:"+df['delivery']
+    send_msg.main(x)
     conn = snowflake.connector.connect(
         user=USER,
         password=PASSWORD,
