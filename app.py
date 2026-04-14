@@ -3,13 +3,13 @@ import requests
 import snowflake.connector
 from snowflake.connector.pandas_tools import write_pandas
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from datetime import datetime, timezone
 import send_msg
 
 url = "https://v2.jokeapi.dev/joke/Dark"
 
-load_dotenv()
+# load_dotenv()
 
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")

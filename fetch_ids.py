@@ -1,11 +1,11 @@
 import requests
 import pandas as pd
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import snowflake.connector
 from snowflake.connector.pandas_tools import write_pandas
 
-load_dotenv()
+# load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 USER = os.getenv("USER")
 PASSWORD = os.getenv("PASSWORD")
