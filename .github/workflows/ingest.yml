@@ -2,8 +2,8 @@ name: Telegram Bot Sender
 
 on:
   schedule:
-    - cron: "48 9 * * *"   # 09:30 UTC daily
-  workflow_dispatch:        # optional manual trigger
+    - cron: "30 4-14 * * *"   
+  workflow_dispatch:        
 
 jobs:
   run-bot:
