@@ -112,9 +112,9 @@ else:
 
         success, nchunks, nrows, _ = write_pandas(conn, df, TABLE_NAME2)
 
-        print("Upload Success:", success)
-        print("Chunks Uploaded:", nchunks)
-        print("Rows Inserted:", nrows)
+        # print("Upload Success:", success)
+        # print("Chunks Uploaded:", nchunks)
+        # print("Rows Inserted:", nrows)
 
         cur.execute(f'SELECT COUNT(*) FROM "{TABLE_NAME2}"')
 
