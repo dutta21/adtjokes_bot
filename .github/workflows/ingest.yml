@@ -1,0 +1,37 @@
+name: Telegram Bot Sender
+
+on:
+  schedule:
+    - cron: "30 9 * * *"   # 09:30 UTC daily
+  workflow_dispatch:        # optional manual trigger
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install pandas requests snowflake-connector-python
+
+      - name: Run script
+        env:
+          USER: ${{ secrets.USER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          ACCOUNT: ${{ secrets.ACCOUNT }}
+          WAREHOUSE: ${{ secrets.WAREHOUSE }}
+          DATABASE: ${{ secrets.DATABASE }}
+          SCHEMA: ${{ secrets.SCHEMA }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          TABLE_NAME1: ${{ secrets.TABLE_NAME1 }}
+          TABLE_NAME2: ${{ secrets.TABLE_NAME2 }}
+          TABLE_NAME3: ${{ secrets.TABLE_NAME3 }}
+        run: python app.py
