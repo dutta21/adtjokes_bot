@@ -7,7 +7,7 @@ import os
 from datetime import datetime, timezone
 import send_msg
 
-url = "https://v2.jokeapi.dev/joke/Dark"
+url = "https://v2.jokeapi.dev/joke/Any"
 
 # load_dotenv()
 
