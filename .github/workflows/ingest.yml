@@ -2,7 +2,7 @@ name: Telegram Bot Sender
 
 on:
   schedule:
-    - cron: "37 9 * * *"   # 09:30 UTC daily
+    - cron: "48 9 * * *"   # 09:30 UTC daily
   workflow_dispatch:        # optional manual trigger
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas requests snowflake-connector-python
+          pip install pandas requests "snowflake-connector-python[pandas]"
 
       - name: Run script
         env:
