@@ -75,7 +75,7 @@ if "joke" in df.columns:
         cur.close()
         conn.close()
 else:
-    x="Joke: \nSetup:"+df['setup']+"\nDelivey:"+df['delivery']
+    x="Joke: \nSetup:"+df['setup']+"\n\nDelivey:"+df['delivery']
     send_msg.main(x)
     conn = snowflake.connector.connect(
         user=USER,
