@@ -2,7 +2,7 @@ name: Telegram Bot Sender
 
 on:
   schedule:
-    - cron: "15 9 * * *"   # 09:30 UTC daily
+    - cron: "37 9 * * *"   # 09:30 UTC daily
   workflow_dispatch:        # optional manual trigger
 
 jobs:
